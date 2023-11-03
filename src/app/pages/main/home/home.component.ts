@@ -4,6 +4,7 @@ import {
   ViewChild,
   inject,
   OnInit,
+  AfterViewInit,
 } from '@angular/core';
 import { MapService } from '../../services/map.service';
 import { Popup, Marker, LngLatLike, Map, LngLatBounds } from 'mapbox-gl';
@@ -17,7 +18,8 @@ import { environment } from 'src/environments/environment';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements  OnInit {
+
   showDiv = false;
   public marker!: Marker;
 
@@ -29,16 +31,20 @@ export class HomeComponent implements OnInit {
   public coordenadas!: LngLatLike;
   private markers: Marker[] = [];
   private projectService = inject(ProjectsService);
-  ngOnInit(): void {
-    this.createMarkerCurrent();
+  async ngOnInit(){
+   await this.createMarkerCurrent();
     this.getMarkers();
   }
-  createMarkerCurrent() {
-    this.mapService.getUserLocation().then((resp) => {
+
+ async  createMarkerCurrent() {
+   await this.mapService.getUserLocation().then((resp) => {
+      if(!resp){
+        alert("No se pudo obtener la localizacion");
+      }
       this.loading = false;
       this.coordenadas = resp;
       mapboxgl.accessToken =environment.token;
-       const map = new mapboxgl.Map({
+      const map = new mapboxgl.Map({
         container: this.mapDivElement.nativeElement,
         style: 'mapbox://styles/mapbox/light-v10', // style URL
         center: this.coordenadas,
@@ -58,10 +64,13 @@ export class HomeComponent implements OnInit {
 
       this.mapService.setMap(map);
     });
+
   }
   getMarkers() {
     this.projectService.getProjects().subscribe((projects: Projects) => {
       const newMarkers = [];
+
+      console.log(projects);
 
       for (const project of Object.values(projects.proyectos)) {
         const { longitud, latitud } = project;
