@@ -1,0 +1,27 @@
+<h2 class="text-center font-[Roboto] text-[#3F51B5] text-[24px] font-bold mt-5 " >Ventas mensuales 2023</h2>
+<div class="m-12">
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
+
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="mes">
+    <th mat-header-cell *matHeaderCellDef> Mes </th>
+    <td mat-cell *matCellDef="let element"> {{element.mes}} </td>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="cantidadtotal">
+    <th mat-header-cell *matHeaderCellDef> Cantidad </th>
+    <td mat-cell *matCellDef="let element"> {{element.cantidadtotal}} </td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="total">
+    <th mat-header-cell *matHeaderCellDef> Total </th>
+    <td mat-cell *matCellDef="let element"> {{element.total}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+</div>

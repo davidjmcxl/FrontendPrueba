@@ -1,0 +1,17 @@
+<div class="flex justify-end h-[50px] w-full bg-[#3f51b5] ">
+
+
+  <button [matMenuTriggerFor]="aboveMenu" routerLinkActive="active" [ngClass]="{ 'bg-[#2c3875]': !stateMenu }"   class="h-full text-white px-5">Compras </button>
+  <mat-menu #aboveMenu="matMenu" yPosition="above">
+    <button mat-menu-item routerLink="/main"  (click)="changePage()"> proyectos</button>
+
+  </mat-menu>
+
+  <button  [matMenuTriggerFor]="belowMenu" [ngClass]="{ 'bg-[#2c3875]': stateMenu }"  class="h-full text-white px-5">Ventas</button>
+  <mat-menu #belowMenu="matMenu" yPosition="below">
+    <button mat-menu-item routerLink="/main/estadisticas" (click)="changePage()">estadisticas</button>
+
+  </mat-menu>
+  <button (click)="logout()"   class="h-full text-white px-5"><mat-icon [fontIcon]="'logout'"></mat-icon></button>
+
+</div>

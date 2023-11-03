@@ -1,0 +1,28 @@
+<div class="flex">
+  <button (click)="toggleDiv()"
+    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded fixed float-right right-12 bottom-12">
+    Crear Proyecto
+  </button>
+</div>
+<div [@slideInLeft]="'in'" *ngIf="showDiv" class="flex flex-col justify-center gap-12 h-[500px] w-[400px] bg-white fixed float-right right-0 my-2 rounded shadow-lg p-5"
+  >
+  <h2 class="text-center font-[Roboto] text-[#3F51B5] text-[24px] font-bold " >Crear Proyecto</h2>
+  <form class="flex flex-col h-[300px] justify-center item-center " [formGroup]="formProjects"  (ngSubmit)="onSubmit()">
+    <mat-form-field >
+      <mat-label>Descripción</mat-label>
+      <input matInput formControlName="descripcion">
+    </mat-form-field>
+
+    <mat-form-field >
+      <mat-label>Latitud</mat-label>
+      <input matInput formControlName="latitud" type="number">
+    </mat-form-field>
+
+    <mat-form-field >
+      <mat-label>Longitud</mat-label>
+      <input matInput formControlName="longitud" type="number">
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" class="w-[80%]" type="submit"><mat-icon fontIcon="save"> </mat-icon> Guardar</button>
+  </form>
+</div>
