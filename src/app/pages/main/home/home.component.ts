@@ -10,6 +10,7 @@ import { Popup, Marker, LngLatLike, Map, LngLatBounds } from 'mapbox-gl';
 import mapboxgl from 'mapbox-gl';
 import { ProjectsService } from '../../services/projects.service';
 import { Projects } from '../../models/project.interface';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-home',
@@ -36,8 +37,8 @@ export class HomeComponent implements OnInit {
     this.mapService.getUserLocation().then((resp) => {
       this.loading = false;
       this.coordenadas = resp;
-
-      const map = new mapboxgl.Map({
+      mapboxgl.accessToken =environment.token;
+       const map = new mapboxgl.Map({
         container: this.mapDivElement.nativeElement,
         style: 'mapbox://styles/mapbox/light-v10', // style URL
         center: this.coordenadas,
